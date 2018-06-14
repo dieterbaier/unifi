@@ -1,0 +1,43 @@
+= unifi
+Dieter Baier <git@dieterbaier.eu>
+:toc:
+
+== Abstract
+[abstract]
+Basically this project contains this README and maybe some scripts which could help while maintaining a network packed with unifi-products.
+ifdef::introduction[]
+There is also a ```Guardfile``` which helps generating a HTML-File from this document. For me, this is helpful, since I write this documentation with a plain texteditor.
+To have a preview within a browser, I use following components while editing:
+
+* Notepad++ (for editing this file)
+* Guard (fow watching the changed adoc-files and generating HTML-Files with Ruby)
+
+To start guarding the README.adoc, start with the command ```guard start```.
+
+For further information, check https://asciidoctor.org/docs/editing-asciidoc-with-live-preview/[the net].
+endif::introduction[]
+
+== CloudKey
+[NOTE]
+====
+The CloudKey reacts not very reseliant. If it doesn't shutdown gracefully, it is most probably corrupted (white light flashes). So a simple power failure could corrupt your CloudKey.
+In my cases usually the mongodb, the ck uses, was corrupted.
+
+So, be carefull, when you'd like to take the ck from your net. Shut it down gracefully every time.
+====
+
+=== Installationdirectory
+The software of the ck is installed unter ```/srv/unifi``` (SSH!)
+
+=== Graceful shutdown
+. Connect via SSH to your CloudKey
+. Type the command ```poweroff```
+
+If you could reach the GUI of the key, you should find a graceful poweroff option somewhere.
+
+=== Where is the automatic backup stored?
+If you set up a automatic backup, the files are stored under ```/srv/unifi/data/backup```
+
+=== How to repair mongodb?
+. Connect via SSH to your CloudKey
+. Type the command ```mongod --dbpath /srv/unifi/data/db --repair```

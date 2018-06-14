@@ -41,3 +41,18 @@ If you set up a automatic backup, the files are stored under ```/srv/unifi/data/
 === How to repair mongodb?
 . Connect via SSH to your CloudKey
 . Type the command ```mongod --dbpath /srv/unifi/data/db --repair```
+
+=== Q&A
+==== Unifi Controller App can not connect to CK eventhough CK-light is blue!?
+Eventhough the flashlight at the CK is blue, I couldn't connect to the controller vie the app.
+
+* Check the server.log under ```/srv/unifi/logs```
+* In my case, the server.log stated a ```UnknownHostException: device.svc.ubnt.com```. So the CK could not connect to the cloud.
+* Open the browser and open the CK-management-gui. If the CK uses a static IP, just type that IP and there you are. Otherwise check your DHCP-Server to find out the IP-Address of your CK
+* Check for firmware-updates
+* In my case, after a firmware-update, everything went fine again
+
+[NOTE]
+====
+Don't take the CK from the net without a graceful shutdown! In my case, I corrupted the mongodb with that and I had to repair first the mongodb before I could connect to the management gui of the CK
+====
